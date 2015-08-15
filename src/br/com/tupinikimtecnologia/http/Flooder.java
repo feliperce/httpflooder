@@ -58,6 +58,10 @@ public class Flooder implements Runnable {
 
     private void sendPost() throws Exception {
 
+        if(isRandomAgent()){
+            this.userAgent = Utils.randomUserAgent();
+        }
+
         URL obj = new URL(targetUrl);
         con = (HttpURLConnection) obj.openConnection();
 
@@ -73,11 +77,11 @@ public class Flooder implements Runnable {
         wr.flush();
         wr.close();
 
-        int responseCode = con.getResponseCode();
-        /*System.out.println("\nPOST URL: " + targetUrl);
+        this.lastResponseCode = con.getResponseCode();
+        System.out.println("\nPOST URL: " + targetUrl);
         System.out.println("Post parameters: " + urlParameters);
-        System.out.println("Response Code: " + responseCode);
-        System.out.println(this.userAgent);*/
+        System.out.println("Response Code: " + this.lastResponseCode);
+        System.out.println(this.userAgent);
 
     }
 
