@@ -64,9 +64,7 @@ public class MainForm {
         });
     }
 
-
-
-    public void startFlooder(){
+    private void startFlooder(){
         if(startButton.getText().equals("START!")){
             if(validateForm()) {
                 startButton.setText("STOP!");
@@ -101,20 +99,38 @@ public class MainForm {
         }
     }
 
-    public void startRespCodeThread(){
+    private void startRespCodeThread(){
         respCodeThRunning = true;
         responseCodeThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while(respCodeThRunning){
-                    responseCodeText.setText(""+flooder.getLastResponseCode());
+                    int respCode = flooder.getLastResponseCode();
+                    responseCodeText.setText(""+respCode);
+                    responseCodeText.setForeground(setRespCodeColor(respCode));
                 }
             }
         });
         responseCodeThread.start();
     }
 
-    public boolean validateForm(){
+    private Color setRespCodeColor(int respCode){
+        if(respCode>=200 && respCode<=226){
+            return Color.GREEN;
+        }
+        if(respCode>=300 && respCode<=308){
+            return Color.yellow;
+        }
+        if(respCode>=400 && respCode<=499){
+            return Color.red;
+        }
+        if(respCode>=500 && respCode<=599){
+            return new Color(117,8,8);
+        }
+        return Color.black;
+    }
+
+    private boolean validateForm(){
         if(urlTextField.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Enter the Target URL field", "Target URL Empty", JOptionPane.ERROR_MESSAGE);
             return false;

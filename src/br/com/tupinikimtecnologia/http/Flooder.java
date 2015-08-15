@@ -74,10 +74,10 @@ public class Flooder implements Runnable {
         wr.close();
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nPOST URL: " + targetUrl);
+        /*System.out.println("\nPOST URL: " + targetUrl);
         System.out.println("Post parameters: " + urlParameters);
         System.out.println("Response Code: " + responseCode);
-        System.out.println(this.userAgent);
+        System.out.println(this.userAgent);*/
 
     }
 
@@ -93,9 +93,9 @@ public class Flooder implements Runnable {
         con.setRequestProperty("User-Agent", this.userAgent);
 
         this.lastResponseCode = con.getResponseCode();
-        System.out.println("\nGET URL: " + this.getTargetUrl());
+        /*System.out.println("\nGET URL: " + this.getTargetUrl());
         System.out.println("Response Code: " + this.lastResponseCode);
-        System.out.println(this.userAgent);
+        System.out.println(this.userAgent);*/
 
     }
 
