@@ -78,10 +78,10 @@ public class Flooder implements Runnable {
         wr.close();
 
         this.lastResponseCode = con.getResponseCode();
-        System.out.println("\nPOST URL: " + targetUrl);
+        /*System.out.println("\nPOST URL: " + targetUrl);
         System.out.println("Post parameters: " + urlParameters);
         System.out.println("Response Code: " + this.lastResponseCode);
-        System.out.println(this.userAgent);
+        System.out.println(this.userAgent);*/
 
     }
 
