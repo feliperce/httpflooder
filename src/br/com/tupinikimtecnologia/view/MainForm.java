@@ -1,6 +1,9 @@
 package br.com.tupinikimtecnologia.view;
 
 import br.com.tupinikimtecnologia.constants.GeralConstants;
+import br.com.tupinikimtecnologia.db.Db;
+import br.com.tupinikimtecnologia.db.TPostData;
+import br.com.tupinikimtecnologia.db.TTarget;
 import br.com.tupinikimtecnologia.http.Flooder;
 import br.com.tupinikimtecnologia.utils.Utils;
 
@@ -8,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
 /**
  * Created by felipe on 14/08/15.
@@ -31,8 +35,20 @@ public class MainForm {
     private Flooder flooder;
     private Thread flooderThread;
     private Thread responseCodeThread;
+    private Db db;
+    private Connection conn;
+    private TTarget tTarget;
+    private TPostData tPostData;
 
     public MainForm() {
+
+        db = new Db();
+        conn = db.conectDb();
+
+        tTarget = new TTarget(conn);
+        tPostData = new TPostData(conn);
+        //tTarget.insertTableTarget("http://www.djisjdiasjd.com");
+        //tPostData.insertTableTarget("postdataaaaaa", 1);
 
         delaySpinner.setModel(new SpinnerNumberModel(0,0,10000,1));
 
@@ -67,13 +83,26 @@ public class MainForm {
     private void startFlooder(){
         if(startButton.getText().equals("START!")){
             if(validateForm()) {
+                String url = urlTextField.getText().trim();
+
+                if(!tTarget.checkIfUrlExists(url)){
+                    tTarget.insertUrl(url);
+                }
+
                 startButton.setText("STOP!");
                 startButton.setForeground(Color.RED);
 
                 if (getRadioButton.isSelected()) {
-                    flooder = new Flooder(urlTextField.getText());
+                    flooder = new Flooder(url);
                 } else if (postRadioButton.isSelected()) {
-                    flooder = new Flooder(urlTextField.getText(), postDataField.getText());
+                    String postData = postDataField.getText().trim();
+                    if(!tPostData.checkIfPostDataExists(postData)){
+                        int targetId = tTarget.selectIdByUrl(url);
+                        if(targetId!=-1){
+                            tPostData.insertPostData(postData, targetId);
+                        }
+                    }
+                    flooder = new Flooder(url, postData);
                 }
 
                 if (!randAgentCheckBox.isSelected()) {

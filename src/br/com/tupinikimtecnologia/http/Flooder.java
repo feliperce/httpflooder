@@ -25,6 +25,8 @@ public class Flooder implements Runnable {
     private boolean running = true;
     private HttpURLConnection con;
 
+    public Flooder(){}
+
     public Flooder(String targetUrl) {
         this.targetUrl = targetUrl.trim();
         this.method = 0;
