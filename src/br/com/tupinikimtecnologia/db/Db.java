@@ -33,8 +33,9 @@ public class Db {
             stmt = conn.createStatement();
             String sql =
                     "CREATE TABLE IF NOT EXISTS 'Target' ("+
-                            "'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-                            "'url'	TEXT NOT NULL UNIQUE);";
+                            "'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+                            "'url' TEXT NOT NULL,"+
+                            "'method' TEXT NOT NULL);";
             stmt.executeUpdate(sql);
             stmt.close();
         } catch ( Exception e ) {
@@ -50,9 +51,9 @@ public class Db {
             stmt = conn.createStatement();
             String sql =
                     "CREATE TABLE IF NOT EXISTS 'PostData' ("+
-                            "'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-                            "'post_data'	TEXT NOT NULL UNIQUE,"+
-                            "'id_target'	INTEGER, "+
+                            "'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+                            "'post_data' TEXT NOT NULL,"+
+                            "'id_target' INTEGER, "+
                             "FOREIGN KEY('id_target') REFERENCES Target(id));";
             stmt.executeUpdate(sql);
             stmt.close();

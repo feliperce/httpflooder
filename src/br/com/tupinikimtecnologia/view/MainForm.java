@@ -80,24 +80,31 @@ public class MainForm {
         });
     }
 
+    private String insertTargetOnDb(String method){
+        String url = urlTextField.getText().trim();
+
+        if(!tTarget.checkIfTargetExists(url, method)){
+            tTarget.insertTarget(url, method);
+        }
+        return url;
+    }
+
     private void startFlooder(){
         if(startButton.getText().equals("START!")){
             if(validateForm()) {
-                String url = urlTextField.getText().trim();
 
-                if(!tTarget.checkIfUrlExists(url)){
-                    tTarget.insertUrl(url);
-                }
 
                 startButton.setText("STOP!");
                 startButton.setForeground(Color.RED);
 
                 if (getRadioButton.isSelected()) {
-                    flooder = new Flooder(url);
+                    flooder = new Flooder(insertTargetOnDb("GET"));
                 } else if (postRadioButton.isSelected()) {
                     String postData = postDataField.getText().trim();
-                    if(!tPostData.checkIfPostDataExists(postData)){
-                        int targetId = tTarget.selectIdByUrl(url);
+                    String url = insertTargetOnDb("POST");
+                    int targetId = tTarget.selectIdByUrlAndMethod(url, "POST");
+                    if(!tPostData.checkIfPostDataExists(postData, targetId)){
+
                         if(targetId!=-1){
                             tPostData.insertPostData(postData, targetId);
                         }

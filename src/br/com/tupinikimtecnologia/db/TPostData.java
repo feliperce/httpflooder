@@ -22,7 +22,7 @@ public class TPostData {
         try{
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
-            String sql = "INSERT INTO PostData (post_data, id_target) "+"VALUES ('"+postData+"',"+idTarget+");";
+            String sql = "INSERT INTO PostData (post_data, id_target) "+"VALUES ('"+postData+"','"+idTarget+"');";
             stmt.executeUpdate(sql);
             stmt.close();
             conn.commit();
@@ -34,12 +34,12 @@ public class TPostData {
         return 1;
     }
 
-    public boolean checkIfPostDataExists(String postData){
+    public boolean checkIfPostDataExists(String postData, int idTarget){
         boolean isPostData;
         try {
             conn.setAutoCommit(false);
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM PostData where post_data = '"+postData+"';";
+            String sql = "SELECT * FROM PostData where post_data = '"+postData+"' AND id_target = '"+idTarget+"';";
             System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
 

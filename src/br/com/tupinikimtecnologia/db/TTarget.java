@@ -16,11 +16,11 @@ public class TTarget {
     public TTarget(Connection conn){
         this.conn = conn;
     }
-    public int insertUrl(String url){
+    public int insertTarget(String url, String method){
         try{
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
-            String sql = "INSERT INTO Target (url) "+"VALUES ('"+url+"');";
+            String sql = "INSERT INTO Target (url, method) "+"VALUES ('"+url+"',+'"+method+"');";
             stmt.executeUpdate(sql);
             stmt.close();
             conn.commit();
@@ -36,27 +36,27 @@ public class TTarget {
 
     }
 
-    public boolean checkIfUrlExists(String url){
-        boolean isUrl;
+    public boolean checkIfTargetExists(String url, String method){
+        boolean isTarget;
         try {
             conn.setAutoCommit(false);
             stmt = conn.createStatement();
-            String sql = "SELECT url FROM Target where url = '"+url+"';";
+            String sql = "SELECT * FROM Target where url = '"+url+"' AND method = '"+method+"';";
             System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
 
             if (rs.next()) {
-                isUrl = true;
+                isTarget = true;
             }else{
-                isUrl = false;
+                isTarget = false;
             }
             rs.close();
             stmt.close();
         } catch ( Exception e ) {
-            isUrl = false;
+            isTarget = false;
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
         }
-        return isUrl;
+        return isTarget;
     }
 
     public int selectIdByUrl(String url){
@@ -65,6 +65,30 @@ public class TTarget {
             conn.setAutoCommit(false);
             stmt = conn.createStatement();
             String sql = "SELECT * FROM Target where url = '"+url+"';";
+            System.out.println(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                if(rs.getString("url").equals(url)){
+                    id = rs.getInt("id");
+                    return id;
+                }
+            }
+            rs.close();
+            stmt.close();
+        } catch ( Exception e ) {
+
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+        }
+        return id;
+    }
+
+    public int selectIdByUrlAndMethod(String url, String method){
+        int id = -1;
+        try {
+            conn.setAutoCommit(false);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM Target where url = '"+url+"' AND method = +'"+method+"';";
             System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
 
