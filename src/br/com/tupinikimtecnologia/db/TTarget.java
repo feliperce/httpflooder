@@ -101,6 +101,8 @@ public class TTarget {
                 targetList.add(target);
             }
 
+            //a
+
             rs.close();
             stmt.close();
         } catch ( Exception e ) {
