@@ -5,7 +5,6 @@ import br.com.tupinikimtecnologia.db.Db;
 import br.com.tupinikimtecnologia.db.TPostData;
 import br.com.tupinikimtecnologia.db.TTarget;
 import br.com.tupinikimtecnologia.http.Flooder;
-import br.com.tupinikimtecnologia.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,11 +17,11 @@ import java.sql.Connection;
  */
 public class MainForm {
     private JPanel panel1;
-    private JTextField urlTextField;
+    private JComboBox urlComboBox;
     private JRadioButton getRadioButton;
     private JRadioButton postRadioButton;
     private JCheckBox randAgentCheckBox;
-    private JTextField postDataField;
+    private JComboBox postDataComboBox;
     private JCheckBox randomDataCheckBox;
     private JButton randomDataHelpButton;
     private JSpinner delaySpinner;
@@ -61,12 +60,12 @@ public class MainForm {
         });
         postRadioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                postDataField.setEnabled(true);
+                postDataComboBox.setEnabled(true);
             }
         });
         getRadioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                postDataField.setEnabled(false);
+                postDataComboBox.setEnabled(false);
             }
         });
         randAgentCheckBox.addActionListener(new ActionListener() {
@@ -80,11 +79,11 @@ public class MainForm {
         });
     }
 
-    private String insertTargetOnDb(String method){
-        String url = urlTextField.getText().trim();
+    private String insertUrlOnDb(){
+        String url = urlComboBox.getSelectedItem().toString().trim();
 
-        if(!tTarget.checkIfTargetExists(url, method)){
-            tTarget.insertTarget(url, method);
+        if(!tTarget.checkIfUrlExists(url)){
+            tTarget.insertTarget(url);
         }
         return url;
     }
@@ -98,11 +97,11 @@ public class MainForm {
                 startButton.setForeground(Color.RED);
 
                 if (getRadioButton.isSelected()) {
-                    flooder = new Flooder(insertTargetOnDb("GET"));
+                    flooder = new Flooder(insertUrlOnDb());
                 } else if (postRadioButton.isSelected()) {
-                    String postData = postDataField.getText().trim();
-                    String url = insertTargetOnDb("POST");
-                    int targetId = tTarget.selectIdByUrlAndMethod(url, "POST");
+                    String postData = postDataComboBox.getSelectedItem().toString().trim();
+                    String url = insertUrlOnDb();
+                    int targetId = tTarget.selectIdByUrl(url);
                     if(!tPostData.checkIfPostDataExists(postData, targetId)){
 
                         if(targetId!=-1){
@@ -167,11 +166,16 @@ public class MainForm {
     }
 
     private boolean validateForm(){
-        if(urlTextField.getText().isEmpty()){
+        if(urlComboBox.getSelectedItem() == null || urlComboBox.getSelectedItem().toString().isEmpty()){
             JOptionPane.showMessageDialog(null, "Enter the Target URL field", "Target URL Empty", JOptionPane.ERROR_MESSAGE);
             return false;
         }else{
-            if(postDataField.isEnabled() && postDataField.getText().isEmpty()){
+            if(postDataComboBox.getSelectedItem() != null) {
+                if (postDataComboBox.isEnabled() && postDataComboBox.getSelectedItem().toString().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Enter the Post Data field", "Post Data Empty", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }else{
                 JOptionPane.showMessageDialog(null, "Enter the Post Data field", "Post Data Empty", JOptionPane.ERROR_MESSAGE);
                 return false;
             }

@@ -34,8 +34,7 @@ public class Db {
             String sql =
                     "CREATE TABLE IF NOT EXISTS 'Target' ("+
                             "'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-                            "'url' TEXT NOT NULL,"+
-                            "'method' TEXT NOT NULL);";
+                            "'url' TEXT NOT NULL);";
             stmt.executeUpdate(sql);
             stmt.close();
         } catch ( Exception e ) {

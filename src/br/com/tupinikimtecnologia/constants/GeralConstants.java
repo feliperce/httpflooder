@@ -19,4 +19,6 @@ public class GeralConstants {
             "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)",
             "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)"
     };
+
+    public static final boolean DEBUG = true;
 }
