@@ -86,7 +86,7 @@ public class TTarget {
 
     public List<Target> selectTargetAll(){
         List<Target> targetList = new ArrayList<Target>();
-        Target target = new Target();
+        Target target;
         try {
 
             conn.setAutoCommit(false);
@@ -96,12 +96,11 @@ public class TTarget {
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
+                target = new Target();
                 target.setId(rs.getInt("id"));
                 target.setUrl(rs.getString("url"));
                 targetList.add(target);
             }
-
-            //a
 
             rs.close();
             stmt.close();

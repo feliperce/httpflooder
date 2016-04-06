@@ -5,12 +5,16 @@ import br.com.tupinikimtecnologia.db.Db;
 import br.com.tupinikimtecnologia.db.TPostData;
 import br.com.tupinikimtecnologia.db.TTarget;
 import br.com.tupinikimtecnologia.http.Flooder;
+import br.com.tupinikimtecnologia.objects.Target;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by felipe on 14/08/15.
@@ -38,6 +42,7 @@ public class MainForm {
     private Connection conn;
     private TTarget tTarget;
     private TPostData tPostData;
+    private List<Target> targetList;
 
     public MainForm() {
 
@@ -50,6 +55,9 @@ public class MainForm {
         //tPostData.insertTableTarget("postdataaaaaa", 1);
 
         delaySpinner.setModel(new SpinnerNumberModel(0,0,10000,1));
+
+        targetList = tTarget.selectTargetAll();
+        setUrlComboBoxAll();
 
         userAgentComboBox.setModel(new DefaultComboBoxModel(GeralConstants.USER_ANGET));
         userAgentComboBox.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
@@ -79,11 +87,22 @@ public class MainForm {
         });
     }
 
+    private void setUrlComboBoxAll(){
+        for(Target t : targetList){
+            urlComboBox.addItem(t.getUrl());
+        }
+    }
+
     private String insertUrlOnDb(){
         String url = urlComboBox.getSelectedItem().toString().trim();
 
         if(!tTarget.checkIfUrlExists(url)){
+            Target target = new Target();
+            target.setUrl(url);
             tTarget.insertTarget(url);
+            target.setId(tTarget.selectIdByUrl(url));
+            targetList.add(target);
+            urlComboBox.addItem(url);
         }
         return url;
     }
@@ -170,17 +189,53 @@ public class MainForm {
             JOptionPane.showMessageDialog(null, "Enter the Target URL field", "Target URL Empty", JOptionPane.ERROR_MESSAGE);
             return false;
         }else{
-            if(postDataComboBox.getSelectedItem() != null) {
-                if (postDataComboBox.isEnabled() && postDataComboBox.getSelectedItem().toString().isEmpty()) {
+            if(postDataComboBox.isEnabled()) {
+                if (postDataComboBox.getSelectedItem() != null) {
+                    if (postDataComboBox.getSelectedItem().toString().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter the Post Data field", "Post Data Empty", JOptionPane.ERROR_MESSAGE);
+                        return false;
+                    }
+                } else {
                     JOptionPane.showMessageDialog(null, "Enter the Post Data field", "Post Data Empty", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
-            }else{
-                JOptionPane.showMessageDialog(null, "Enter the Post Data field", "Post Data Empty", JOptionPane.ERROR_MESSAGE);
-                return false;
             }
         }
         return true;
+    }
+
+    public static void setMainMenu(JFrame frame){
+        JMenuBar menuBar;
+        JMenu menu;
+        JMenuItem menuItem;
+
+        //target menu
+        menuBar = new JMenuBar();
+        menu = new JMenu("Target");
+        menu.setMnemonic(KeyEvent.VK_A);
+        menuBar.add(menu);
+
+        menuItem = new JMenuItem("Target History",
+                new ImageIcon("img/target_icon.png"));
+        menuItem.setMnemonic(KeyEvent.VK_T);
+        menu.add(menuItem);
+
+        //help menu
+        menu = new JMenu("Help");
+        menu.setMnemonic(KeyEvent.VK_E);
+        menuBar.add(menu);
+
+        menuItem = new JMenuItem("How it works?",
+                new ImageIcon("img/help_icon.png"));
+        menuItem.setMnemonic(KeyEvent.VK_O);
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("About",
+                new ImageIcon("img/about_icon.png"));
+        menuItem.setMnemonic(KeyEvent.VK_B);
+        menu.add(menuItem);
+
+        frame.setJMenuBar(menuBar);
     }
 
     public static void main(String[] args) {
@@ -191,5 +246,6 @@ public class MainForm {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        setMainMenu(frame);
     }
 }
