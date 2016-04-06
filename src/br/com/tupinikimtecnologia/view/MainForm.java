@@ -218,6 +218,7 @@ public class MainForm {
         menuItem = new JMenuItem("Target History",
                 new ImageIcon("img/target_icon.png"));
         menuItem.setMnemonic(KeyEvent.VK_T);
+
         menu.add(menuItem);
 
         //help menu
@@ -227,7 +228,7 @@ public class MainForm {
 
         menuItem = new JMenuItem("How it works?",
                 new ImageIcon("img/help_icon.png"));
-        menuItem.setMnemonic(KeyEvent.VK_O);
+        menuItem.setMnemonic(KeyEvent.VK_H);
         menu.add(menuItem);
 
         menuItem = new JMenuItem("About",
