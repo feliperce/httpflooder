@@ -12,7 +12,10 @@ import br.com.tupinikimtecnologia.http.Flooder;
 import br.com.tupinikimtecnologia.objects.Target;
 import java.awt.Color;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -40,21 +43,36 @@ public class MainForm extends javax.swing.JFrame {
         setResizable(false);
         pack();
         setLocationRelativeTo(null);
-        db = new Db();
-        conn = db.conectDb();
-
-        tTarget = new TTarget(conn);
-        tPostData = new TPostData(conn);
+        
+        setDb();
         //tTarget.insertTableTarget("http://www.djisjdiasjd.com");
         //tPostData.insertTableTarget("postdataaaaaa", 1);
 
         delaySpinner.setModel(new SpinnerNumberModel(0,0,10000,1));
 
         targetList = tTarget.selectTargetAll();
+        
+        closeDb();
 
         userAgentComboBox.setModel(new DefaultComboBoxModel(GeralConstants.USER_ANGET));
         userAgentComboBox.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
 
+    }
+    
+    private void setDb(){
+        db = new Db();
+        conn = db.conectDb();
+
+        tTarget = new TTarget(conn);
+        tPostData = new TPostData(conn);
+    }
+    
+    private void closeDb(){
+        try {
+            db.closeDb();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private String insertUrlOnDb(){
@@ -88,6 +106,8 @@ public class MainForm extends javax.swing.JFrame {
     private void startFlooder(){
         if(startButton.getText().equals("START!")){
             if(validateForm()) {
+                setDb();
+                
                 startButton.setText("STOP!");
                 startButton.setForeground(Color.RED);
 
@@ -96,6 +116,7 @@ public class MainForm extends javax.swing.JFrame {
                 } else if (postRadioButton.isSelected()) {
                     String postData = postDataComboBox.getSelectedItem().toString().trim();
                     String url = urlField.getText();
+                    insertUrlOnDb();
                     int targetId = tTarget.selectIdByUrl(url);
                     if(!tPostData.checkIfPostDataExists(postData, targetId)){
 
@@ -117,6 +138,7 @@ public class MainForm extends javax.swing.JFrame {
                 flooderThread.start();
                 startRespCodeThread();
                 progressBar1.setIndeterminate(true);
+                closeDb();
             }
         }else{
             respCodeThRunning = false;
@@ -211,6 +233,7 @@ public class MainForm extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("HttpFlooder");
 
         jLabel1.setText("Target URL:");
 
@@ -294,6 +317,11 @@ public class MainForm extends javax.swing.JFrame {
 
         targetHistoryMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/tupinikimtecnologia/img/target_icon.png"))); // NOI18N
         targetHistoryMenuItem.setText("Target History");
+        targetHistoryMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                targetHistoryMenuItemActionPerformed(evt);
+            }
+        });
         jMenu1.add(targetHistoryMenuItem);
 
         jMenuBar1.add(jMenu1);
@@ -408,6 +436,12 @@ public class MainForm extends javax.swing.JFrame {
     private void getRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getRadioButtonActionPerformed
         postDataComboBox.setEnabled(false);
     }//GEN-LAST:event_getRadioButtonActionPerformed
+
+    private void targetHistoryMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_targetHistoryMenuItemActionPerformed
+        closeDb();
+        TargetForm targetForm = new TargetForm();
+        targetForm.setVisible(true);
+    }//GEN-LAST:event_targetHistoryMenuItemActionPerformed
 
     /**
      * @param args the command line arguments

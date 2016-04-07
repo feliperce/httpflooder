@@ -23,6 +23,10 @@ public class Db {
         createTablePostData();
         return conn;
     }
+    
+    public boolean isClosed() throws SQLException{
+        return conn.isClosed();
+    }
 
     public void closeDb() throws SQLException {
         conn.close();

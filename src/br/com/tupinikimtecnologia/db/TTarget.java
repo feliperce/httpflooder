@@ -23,7 +23,6 @@ public class TTarget {
         this.conn = conn;
     }
     public int insertTarget(String url){
-        System.out.println("INSETT");
         try{
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
@@ -32,8 +31,8 @@ public class TTarget {
             stmt.close();
             conn.commit();
         } catch ( Exception e ) {
-            System.out.println("Erro ao inserir dados tabela TARGET");
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.out.println("Error on INSERT TARGET");
+            System.err.println( e.getClass().getName() + ":: " + e.getMessage() );
             return 0;
         }
     return 1;
