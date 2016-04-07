@@ -10,8 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by felipe on 20/09/15.
+/*
+ * Created by: Felipe Rodrigues
+ * http://www.tupinikimtecnologia.com.br
  */
 public class TTarget {
 
@@ -22,6 +23,7 @@ public class TTarget {
         this.conn = conn;
     }
     public int insertTarget(String url){
+        System.out.println("INSETT");
         try{
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
