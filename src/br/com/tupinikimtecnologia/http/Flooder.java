@@ -1,3 +1,7 @@
+/*
+ * Created by: Felipe Rodrigues
+ * http://www.tupinikimtecnologia.com.br
+ */
 package br.com.tupinikimtecnologia.http;
 
 import br.com.tupinikimtecnologia.utils.Utils;
