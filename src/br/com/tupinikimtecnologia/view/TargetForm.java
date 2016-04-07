@@ -7,6 +7,7 @@ package br.com.tupinikimtecnologia.view;
 import br.com.tupinikimtecnologia.db.Db;
 import br.com.tupinikimtecnologia.db.TPostData;
 import br.com.tupinikimtecnologia.db.TTarget;
+import br.com.tupinikimtecnologia.objects.PostData;
 import br.com.tupinikimtecnologia.objects.Target;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -25,7 +26,8 @@ public class TargetForm extends javax.swing.JFrame {
     private TTarget tTarget;
     private TPostData tPostData;
     private Target target;
-    private List<Target> targetList;
+    private List<Target> targetArrayList;
+    private List<PostData> postArrayList;
     private Db db;
     private Connection conn;
     private DefaultListModel listUrlModel;
@@ -66,17 +68,23 @@ public class TargetForm extends javax.swing.JFrame {
     
     private void setUrlListAll(){
         setDb();
-        targetList = tTarget.selectTargetAll();
-        for(Target t : targetList){
-            System.out.println(t.getUrl());
+        targetArrayList = tTarget.selectTargetAll();
+        for(Target t : targetArrayList){
             listUrlModel.addElement(t.getUrl());
         }
         closeDb();
     }
     
-    private void setPostDataList(){
+    private void setPostDataList(String url){
         setDb();
-        
+        int id = tTarget.selectIdByUrl(url);
+        if(id!=-1){
+            postArrayList = tPostData.selectPostDataByTargetId(id);
+            for(PostData p : postArrayList){
+                listPostDataModel.addElement(p.getPostData());
+            }
+        }
+        closeDb();
     }
 
 
@@ -99,6 +107,7 @@ public class TargetForm extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Target URL"));
 
+        urlList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         urlList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 urlListMouseClicked(evt);
@@ -142,6 +151,7 @@ public class TargetForm extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("POST Data"));
 
+        postDataList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(postDataList);
 
         postDataRemoveButton.setText("REMOVE");
@@ -193,8 +203,9 @@ public class TargetForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void urlListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_urlListMouseClicked
+        listPostDataModel.clear();
         if(evt.getClickCount()==1){
-            
+            setPostDataList(urlList.getSelectedValue());
         }
     }//GEN-LAST:event_urlListMouseClicked
 

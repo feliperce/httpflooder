@@ -1,8 +1,11 @@
 package br.com.tupinikimtecnologia.db;
 
+import br.com.tupinikimtecnologia.objects.PostData;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by felipe on 20/09/15.
@@ -15,8 +18,6 @@ public class TPostData {
     public TPostData(Connection conn){
         this.conn = conn;
     }
-
-
 
     public int insertPostData(String postData, int idTarget){
         try{
@@ -55,5 +56,31 @@ public class TPostData {
             System.err.println(e.getClass().getName() + ": " + e.getMessage() );
         }
         return isPostData;
+    }
+    
+    public List<PostData> selectPostDataByTargetId(int id){
+        List<PostData> postDataList = new ArrayList<PostData>();
+        PostData postData;
+        try {
+            conn.setAutoCommit(false);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM PostData where id_target = '"+id+"';";
+            System.out.println(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                postData = new PostData();
+                postData.setId(rs.getInt("id"));
+                postData.setIdTarget(rs.getInt("id_target"));
+                postData.setPostData(rs.getString("post_data"));
+                postDataList.add(postData);
+            }
+            rs.close();
+            stmt.close();
+        } catch ( Exception e ) {
+
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+        }
+        return postDataList;
     }
 }
