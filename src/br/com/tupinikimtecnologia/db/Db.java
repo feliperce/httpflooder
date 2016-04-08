@@ -1,5 +1,6 @@
 package br.com.tupinikimtecnologia.db;
 
+import br.com.tupinikimtecnologia.constants.GeralConstants;
 import java.sql.*;
 
 /**
@@ -39,6 +40,10 @@ public class Db {
                     "CREATE TABLE IF NOT EXISTS 'Target' ("+
                             "'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
                             "'url' TEXT NOT NULL);";
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- Table CREATE ---");
+                System.out.println(sql);
+            }
             stmt.executeUpdate(sql);
             stmt.close();
         } catch ( Exception e ) {

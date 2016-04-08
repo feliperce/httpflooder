@@ -22,16 +22,35 @@ public class TTarget {
     public TTarget(Connection conn){
         this.conn = conn;
     }
+    
     public int insertTarget(String url){
         try{
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
             String sql = "INSERT INTO Target (url) "+"VALUES ('"+url+"');";
+            System.out.println(sql);
             stmt.executeUpdate(sql);
             stmt.close();
             conn.commit();
         } catch ( Exception e ) {
             System.out.println("Error on INSERT TARGET");
+            System.err.println( e.getClass().getName() + ":: " + e.getMessage() );
+            return 0;
+        }
+    return 1;
+    }
+    
+    public int editTarget(String url, int id){
+        try{
+            stmt = conn.createStatement();
+            conn.setAutoCommit(false);
+            String sql = "UPDATE Target SET url= '"+url+"' where id= "+id;
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            stmt.close();
+            conn.commit();
+        } catch ( Exception e ) {
+            System.out.println("Error on update TARGET");
             System.err.println( e.getClass().getName() + ":: " + e.getMessage() );
             return 0;
         }

@@ -35,6 +35,23 @@ public class TPostData {
         return 1;
     }
     
+    public int editPostData(String postData, int id){
+        try{
+            stmt = conn.createStatement();
+            conn.setAutoCommit(false);
+            String sql = "UPDATE PostData SET post_data= '"+postData+"' where id= "+id;
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            stmt.close();
+            conn.commit();
+        } catch ( Exception e ) {
+            System.out.println("Error on update PostData");
+            System.err.println( e.getClass().getName() + ":: " + e.getMessage() );
+            return 0;
+        }
+    return 1;
+    }
+    
     public int deletePostDataByTargetId(int idTarget){
         try{
             stmt = conn.createStatement();

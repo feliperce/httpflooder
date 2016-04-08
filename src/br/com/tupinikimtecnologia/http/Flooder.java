@@ -4,6 +4,7 @@
  */
 package br.com.tupinikimtecnologia.http;
 
+import br.com.tupinikimtecnologia.constants.GeralConstants;
 import br.com.tupinikimtecnologia.utils.Utils;
 
 import java.io.BufferedReader;
@@ -84,10 +85,12 @@ public class Flooder implements Runnable {
         wr.close();
 
         this.lastResponseCode = con.getResponseCode();
-        /*System.out.println("\nPOST URL: " + targetUrl);
-        System.out.println("Post parameters: " + urlParameters);
-        System.out.println("Response Code: " + this.lastResponseCode);
-        System.out.println(this.userAgent);*/
+        if(GeralConstants.Debug.HTTP_REQUEST_SHOW){
+            System.out.println("\nPOST URL: " + targetUrl);
+            System.out.println("Post: " + urlParameters);
+            System.out.println("Response Code: " + this.lastResponseCode);
+            System.out.println("Agent: "+this.userAgent);
+        }
 
     }
 
@@ -103,9 +106,11 @@ public class Flooder implements Runnable {
         con.setRequestProperty("User-Agent", this.userAgent);
 
         this.lastResponseCode = con.getResponseCode();
-        /*System.out.println("\nGET URL: " + this.getTargetUrl());
-        System.out.println("Response Code: " + this.lastResponseCode);
-        System.out.println(this.userAgent);*/
+        if(GeralConstants.Debug.HTTP_REQUEST_SHOW){
+            System.out.println("\nGET URL: " + this.getTargetUrl());
+            System.out.println("Response Code: " + this.lastResponseCode);
+            System.out.println("Agent: "+this.userAgent);
+        }
 
     }
 
