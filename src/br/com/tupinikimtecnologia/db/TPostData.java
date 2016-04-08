@@ -1,5 +1,6 @@
 package br.com.tupinikimtecnologia.db;
 
+import br.com.tupinikimtecnologia.constants.GeralConstants;
 import br.com.tupinikimtecnologia.objects.PostData;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -24,6 +25,10 @@ public class TPostData {
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
             String sql = "INSERT INTO PostData (post_data, id_target) "+"VALUES ('"+postData+"','"+idTarget+"');";
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- insertPostData(String postData, int idTarget) TPostData class ---");
+                System.out.println(sql+"\n");
+            }
             stmt.executeUpdate(sql);
             stmt.close();
             conn.commit();
@@ -40,7 +45,10 @@ public class TPostData {
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
             String sql = "UPDATE PostData SET post_data= '"+postData+"' where id= "+id;
-            System.out.println(sql);
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- editPostData(String postData, int id) TPostData class ---");
+                System.out.println(sql+"\n");
+            }
             stmt.executeUpdate(sql);
             stmt.close();
             conn.commit();
@@ -57,6 +65,10 @@ public class TPostData {
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
             String sql = "DELETE FROM PostData WHERE id_target = '"+idTarget+"';";
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- deletePostDataByTargetId(int idTarget) TPostData class ---");
+                System.out.println(sql+"\n");
+            }
             stmt.executeUpdate(sql);
             stmt.close();
             conn.commit();
@@ -73,6 +85,10 @@ public class TPostData {
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
             String sql = "DELETE FROM PostData WHERE id = '"+id+"';";
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- deletePostDataById(int id) TPostData class ---");
+                System.out.println(sql+"\n");
+            }
             stmt.executeUpdate(sql);
             stmt.close();
             conn.commit();
@@ -90,7 +106,10 @@ public class TPostData {
             conn.setAutoCommit(false);
             stmt = conn.createStatement();
             String sql = "SELECT * FROM PostData where post_data = '"+postData+"' AND id_target = '"+idTarget+"';";
-            System.out.println(sql);
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- checkIfPostDataExists(String postData, int idTarget) TPostData class ---");
+                System.out.println(sql+"\n");
+            }
             ResultSet rs = stmt.executeQuery(sql);
 
             if (rs.next()) {
@@ -114,7 +133,10 @@ public class TPostData {
             conn.setAutoCommit(false);
             stmt = conn.createStatement();
             String sql = "SELECT * FROM PostData where id_target = '"+id+"';";
-            System.out.println(sql);
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- selectPostDataByTargetId(int id) TPostData class ---");
+                System.out.println(sql+"\n");
+            }
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {

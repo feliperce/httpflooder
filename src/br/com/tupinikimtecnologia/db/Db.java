@@ -41,13 +41,13 @@ public class Db {
                             "'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
                             "'url' TEXT NOT NULL);";
             if(GeralConstants.Debug.SQL_SHOW){
-                System.out.println("--- Table CREATE ---");
+                System.out.println("--- createTableTarget() Db class ---");
                 System.out.println(sql);
             }
             stmt.executeUpdate(sql);
             stmt.close();
         } catch ( Exception e ) {
-            System.out.println("Erro ao criar tabela TARGET");
+            System.out.println("Error on Target table");
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             return 0;
         }
@@ -63,6 +63,10 @@ public class Db {
                             "'post_data' TEXT NOT NULL,"+
                             "'id_target' INTEGER, "+
                             "FOREIGN KEY('id_target') REFERENCES Target(id));";
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- createTablePostData() Db class ---");
+                System.out.println(sql);
+            }
             stmt.executeUpdate(sql);
             stmt.close();
         } catch ( Exception e ) {

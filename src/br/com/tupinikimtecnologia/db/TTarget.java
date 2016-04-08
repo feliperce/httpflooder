@@ -28,7 +28,10 @@ public class TTarget {
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
             String sql = "INSERT INTO Target (url) "+"VALUES ('"+url+"');";
-            System.out.println(sql);
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- insertTarget(String url) TTarget class ---");
+                System.out.println(sql+"\n");
+            }
             stmt.executeUpdate(sql);
             stmt.close();
             conn.commit();
@@ -45,7 +48,10 @@ public class TTarget {
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
             String sql = "UPDATE Target SET url= '"+url+"' where id= "+id;
-            System.out.println(sql);
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- editTarget(String url, int id) TTarget class ---");
+                System.out.println(sql+"\n");
+            }
             stmt.executeUpdate(sql);
             stmt.close();
             conn.commit();
@@ -62,6 +68,10 @@ public class TTarget {
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
             String sql = "DELETE FROM Target WHERE id = '"+id+"';";
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- deleteTargetById(int id) TTarget class ---");
+                System.out.println(sql+"\n");
+            }
             stmt.executeUpdate(sql);
             stmt.close();
             conn.commit();
@@ -79,7 +89,10 @@ public class TTarget {
             conn.setAutoCommit(false);
             stmt = conn.createStatement();
             String sql = "SELECT * FROM Target where url = '"+url+"';";
-            System.out.println(sql);
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- checkIfUrlExists(String url) TTarget class ---");
+                System.out.println(sql+"\n");
+            }
             ResultSet rs = stmt.executeQuery(sql);
 
             if (rs.next()) {
@@ -102,7 +115,10 @@ public class TTarget {
             conn.setAutoCommit(false);
             stmt = conn.createStatement();
             String sql = "SELECT * FROM Target where url = '"+url+"';";
-            System.out.println(sql);
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- selectIdByUrl(String url) TTarget class ---");
+                System.out.println(sql+"\n");
+            }
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -128,7 +144,10 @@ public class TTarget {
             conn.setAutoCommit(false);
             stmt = conn.createStatement();
             String sql = "SELECT * FROM Target;";
-            System.out.println(sql);
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- selectTargetAll() TTarget class ---");
+                System.out.println(sql+"\n");
+            }
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -154,7 +173,10 @@ public class TTarget {
             conn.setAutoCommit(false);
             stmt = conn.createStatement();
             String sql = "SELECT url FROM Target;";
-            System.out.println(sql);
+            if(GeralConstants.Debug.SQL_SHOW){
+                System.out.println("--- selectUrlAll() TTarget class ---");
+                System.out.println(sql+"\n");
+            }
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
