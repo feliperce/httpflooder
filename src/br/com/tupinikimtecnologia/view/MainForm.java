@@ -185,8 +185,16 @@ public class MainForm extends javax.swing.JFrame {
         return true;
     }
     
-    public static void setSelectedTarget(String url, List<PostData> postData){
-        
+    public void setSelectedTarget(String url, List<PostData> postData){
+        urlField.setText(url);
+        postDataComboBox.removeAllItems();
+        if(postData!=null){
+            if(!postData.isEmpty()){
+                for(PostData p : postData){
+                    postDataComboBox.addItem(p.getPostData());
+                }
+            }
+        }
         
     }
 
@@ -327,6 +335,11 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/tupinikimtecnologia/img/about_icon.png"))); // NOI18N
         jMenuItem2.setText("About");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
@@ -435,6 +448,11 @@ public class MainForm extends javax.swing.JFrame {
         TargetForm targetForm = new TargetForm(this);
         targetForm.setVisible(true);
     }//GEN-LAST:event_targetHistoryMenuItemActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        AboutDialog aboutDialog = new AboutDialog(this, true);
+        aboutDialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
