@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -35,8 +36,9 @@ public class TargetForm extends javax.swing.JFrame {
     private Connection conn;
     private DefaultListModel listUrlModel;
     private DefaultListModel listPostDataModel;
+    private MainForm mainForm;
     
-    public TargetForm() {
+    public TargetForm(MainForm mainForm) {
         initComponents();
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setResizable(false);
@@ -48,8 +50,6 @@ public class TargetForm extends javax.swing.JFrame {
         urlList.setModel(listUrlModel);
         postDataList.setModel(listPostDataModel);
 
-        TargetListHelper ta = new TargetListHelper();
-        ta.setUrl("fd");
         setUrlListAll();
         
         
@@ -289,7 +289,11 @@ public class TargetForm extends javax.swing.JFrame {
             TargetListHelper targetHelper = (TargetListHelper)urlList.getSelectedValue();
             setPostDataList(targetHelper);
         }else if(evt.getClickCount()==2){
-            
+            setDb();
+            TargetListHelper tHelper = (TargetListHelper)urlList.getSelectedValue();
+            postArrayList = tPostData.selectPostDataByTargetId(tHelper.getId());
+
+            closeDb();
             dispose();
         }
     }//GEN-LAST:event_urlListMouseClicked
@@ -350,7 +354,7 @@ public class TargetForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TargetForm().setVisible(true);
+                new TargetForm(mainForm).setVisible(true);
             }
         });
     }

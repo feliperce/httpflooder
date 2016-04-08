@@ -9,6 +9,7 @@ import br.com.tupinikimtecnologia.db.Db;
 import br.com.tupinikimtecnologia.db.TPostData;
 import br.com.tupinikimtecnologia.db.TTarget;
 import br.com.tupinikimtecnologia.http.Flooder;
+import br.com.tupinikimtecnologia.objects.PostData;
 import br.com.tupinikimtecnologia.objects.Target;
 import java.awt.Color;
 import java.sql.Connection;
@@ -184,7 +185,8 @@ public class MainForm extends javax.swing.JFrame {
         return true;
     }
     
-    public void setSelectedTarget(){
+    public static void setSelectedTarget(String url, List<PostData> postData){
+        
         
     }
 
@@ -430,7 +432,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void targetHistoryMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_targetHistoryMenuItemActionPerformed
         closeDb();
-        TargetForm targetForm = new TargetForm();
+        TargetForm targetForm = new TargetForm(this);
         targetForm.setVisible(true);
     }//GEN-LAST:event_targetHistoryMenuItemActionPerformed
 
@@ -497,4 +499,5 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField urlField;
     private javax.swing.JComboBox<String> userAgentComboBox;
     // End of variables declaration//GEN-END:variables
+
 }
