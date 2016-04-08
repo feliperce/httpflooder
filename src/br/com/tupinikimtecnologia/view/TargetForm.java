@@ -288,6 +288,8 @@ public class TargetForm extends javax.swing.JFrame {
         if(evt.getClickCount()==1){
             TargetListHelper targetHelper = (TargetListHelper)urlList.getSelectedValue();
             setPostDataList(targetHelper);
+        }else if(evt.getClickCount()==2){
+            dispose();
         }
     }//GEN-LAST:event_urlListMouseClicked
 
