@@ -9,8 +9,8 @@ package br.com.tupinikimtecnologia.objects;
  * @author felipe
  */
 public class PostData {
-    private int id, idTarget;
-    private String postData;
+    protected int id, idTarget;
+    protected String postData;
 
     public int getId() {
         return id;

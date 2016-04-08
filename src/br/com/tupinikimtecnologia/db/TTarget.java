@@ -37,6 +37,22 @@ public class TTarget {
         }
     return 1;
     }
+    
+    public int deleteTargetById(int id){
+        try{
+            stmt = conn.createStatement();
+            conn.setAutoCommit(false);
+            String sql = "DELETE FROM Target WHERE id = '"+id+"';";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            conn.commit();
+        } catch ( Exception e ) {
+            System.out.println("Delete Target by id Error");
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            return 0;
+        }
+        return 1;
+    }
 
     public boolean checkIfUrlExists(String url){
         boolean isTarget;
@@ -73,18 +89,18 @@ public class TTarget {
             while (rs.next()) {
                 if(rs.getString("url").equals(url)){
                     id = rs.getInt("id");
-                    return id;
                 }
             }
             rs.close();
             stmt.close();
+            return id;
         } catch ( Exception e ) {
 
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
         }
         return id;
     }
-
+    
     public List<Target> selectTargetAll(){
         List<Target> targetList = new ArrayList<Target>();
         Target target;

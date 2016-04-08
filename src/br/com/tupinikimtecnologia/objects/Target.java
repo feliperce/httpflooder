@@ -5,8 +5,8 @@ package br.com.tupinikimtecnologia.objects;
  */
 public class Target {
 
-    private int id;
-    private String url;
+    protected int id;
+    protected String url;
 
     public int getId() {
         return id;

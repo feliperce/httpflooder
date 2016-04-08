@@ -8,7 +8,9 @@ import br.com.tupinikimtecnologia.db.Db;
 import br.com.tupinikimtecnologia.db.TPostData;
 import br.com.tupinikimtecnologia.db.TTarget;
 import br.com.tupinikimtecnologia.objects.PostData;
+import br.com.tupinikimtecnologia.objects.PostDataListHelper;
 import br.com.tupinikimtecnologia.objects.Target;
+import br.com.tupinikimtecnologia.objects.TargetListHelper;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,6 +48,8 @@ public class TargetForm extends javax.swing.JFrame {
         urlList.setModel(listUrlModel);
         postDataList.setModel(listPostDataModel);
 
+        TargetListHelper ta = new TargetListHelper();
+        ta.setUrl("fd");
         setUrlListAll();
         
         
@@ -70,23 +75,41 @@ public class TargetForm extends javax.swing.JFrame {
         setDb();
         targetArrayList = tTarget.selectTargetAll();
         for(Target t : targetArrayList){
-            listUrlModel.addElement(t.getUrl());
+            listUrlModel.addElement(new TargetListHelper(t.getId(), t.getUrl()));
         }
         closeDb();
     }
     
-    private void setPostDataList(String url){
+    private void setPostDataList(TargetListHelper tHelper){
         setDb();
-        int id = tTarget.selectIdByUrl(url);
-        if(id!=-1){
-            postArrayList = tPostData.selectPostDataByTargetId(id);
-            for(PostData p : postArrayList){
-                listPostDataModel.addElement(p.getPostData());
-            }
+        postArrayList = tPostData.selectPostDataByTargetId(tHelper.getId());
+        for(PostData p : postArrayList){
+            listPostDataModel.addElement(new PostDataListHelper(p.getId(), p.getPostData()));
         }
         closeDb();
     }
+    
+    private void removeTarget(TargetListHelper tHelper){
+        setDb();
+        int id = tHelper.getId();
+        tPostData.deletePostDataByTargetId(id);
+        tTarget.deleteTargetById(id);
+        listUrlModel.removeElementAt(urlList.getSelectedIndex());
+        listPostDataModel.clear();
+        closeDb();
+    }
+    
+    private void removePostData(PostDataListHelper pHelper){
+        setDb();
+        int id = pHelper.getId();
+        tPostData.deletePostDataById(id);
+        listPostDataModel.removeElementAt(postDataList.getSelectedIndex());
+        closeDb();
+    }
 
+    private int showRemoveDialog(String msg){
+        return JOptionPane.showConfirmDialog(null, "Do yout want to remove selected "+msg+"?", "REMOVE WARNING", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -116,6 +139,11 @@ public class TargetForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(urlList);
 
         urlRemoveButton.setText("REMOVE");
+        urlRemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                urlRemoveButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 10)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
@@ -143,10 +171,10 @@ public class TargetForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(urlRemoveButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(72, 72, 72))))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("POST Data"));
@@ -155,6 +183,11 @@ public class TargetForm extends javax.swing.JFrame {
         jScrollPane2.setViewportView(postDataList);
 
         postDataRemoveButton.setText("REMOVE");
+        postDataRemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postDataRemoveButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -205,9 +238,24 @@ public class TargetForm extends javax.swing.JFrame {
     private void urlListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_urlListMouseClicked
         listPostDataModel.clear();
         if(evt.getClickCount()==1){
-            setPostDataList(urlList.getSelectedValue());
+            TargetListHelper targetHelper = (TargetListHelper)urlList.getSelectedValue();
+            setPostDataList(targetHelper);
         }
     }//GEN-LAST:event_urlListMouseClicked
+
+    private void urlRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urlRemoveButtonActionPerformed
+        if(showRemoveDialog("Target")==0){
+            TargetListHelper tHelper = (TargetListHelper)urlList.getSelectedValue();
+            removeTarget(tHelper);
+        }
+    }//GEN-LAST:event_urlRemoveButtonActionPerformed
+
+    private void postDataRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postDataRemoveButtonActionPerformed
+        if(showRemoveDialog("POST Data")==0){
+            PostDataListHelper pHelper = (PostDataListHelper)postDataList.getSelectedValue();
+            removePostData(pHelper);
+        }
+    }//GEN-LAST:event_postDataRemoveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,9 +298,9 @@ public class TargetForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<String> postDataList;
+    private javax.swing.JList<PostDataListHelper> postDataList;
     private javax.swing.JButton postDataRemoveButton;
-    private javax.swing.JList<String> urlList;
+    private javax.swing.JList<TargetListHelper> urlList;
     private javax.swing.JButton urlRemoveButton;
     // End of variables declaration//GEN-END:variables
 }

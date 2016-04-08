@@ -82,10 +82,10 @@
                           <Component id="jScrollPane1" pref="148" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                          <Component id="urlRemoveButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
+                          <Component id="urlRemoveButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -111,7 +111,7 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="urlListMouseClicked"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;TargetListHelper&gt;"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -120,6 +120,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="REMOVE"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="urlRemoveButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -185,7 +188,7 @@
                 <Property name="selectionMode" type="int" value="0"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;PostDataListHelper&gt;"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -194,6 +197,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="REMOVE"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="postDataRemoveButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
