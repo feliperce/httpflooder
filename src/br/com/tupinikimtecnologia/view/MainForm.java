@@ -89,20 +89,6 @@ public class MainForm extends javax.swing.JFrame {
         }
     }*/
 
-    /*private String insertUrlOnDb(){
-        String url = urlComboBox.getSelectedItem().toString().trim();
-
-        if(!tTarget.checkIfUrlExists(url)){
-            Target target = new Target();
-            target.setUrl(url);
-            tTarget.insertTarget(url);
-            target.setId(tTarget.selectIdByUrl(url));
-            targetList.add(target);
-            urlComboBox.addItem(url);
-        }
-        return url;
-    }*/
-
     private void startFlooder(){
         if(startButton.getText().equals("START!")){
             if(validateForm()) {
@@ -121,6 +107,7 @@ public class MainForm extends javax.swing.JFrame {
                     if(!tPostData.checkIfPostDataExists(postData, targetId)){
 
                         if(targetId!=-1){
+                            postDataComboBox.addItem(postData);
                             tPostData.insertPostData(postData, targetId);
                         }
                     }
@@ -195,6 +182,10 @@ public class MainForm extends javax.swing.JFrame {
             }
         }
         return true;
+    }
+    
+    public void setSelectedTarget(){
+        
     }
 
     /**
