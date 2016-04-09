@@ -316,7 +316,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenu1.setText("Target");
 
-        targetHistoryMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/tupinikimtecnologia/img/target_icon.png"))); // NOI18N
         targetHistoryMenuItem.setText("Target History");
         targetHistoryMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,11 +328,9 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenu2.setText("Help");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/tupinikimtecnologia/img/help_icon.png"))); // NOI18N
         jMenuItem1.setText("How to use?");
         jMenu2.add(jMenuItem1);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/tupinikimtecnologia/img/about_icon.png"))); // NOI18N
         jMenuItem2.setText("About");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
