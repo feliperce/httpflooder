@@ -35,6 +35,6 @@ public class GeralConstants {
 
     public static final class Debug{
         public static final boolean SQL_SHOW = false;
-        public static final boolean HTTP_REQUEST_SHOW = false;
+        public static final boolean HTTP_REQUEST_SHOW = true;
     }
 }

@@ -20,11 +20,11 @@ import java.net.URL;
  */
 public class Flooder implements Runnable {
 
-    private String targetUrl;
+    private String targetUrl, targetUrlNew;
     private String userAgent;
     private int method;
     private boolean randomAgent;
-    private String postData;
+    private String postData, postDataNew;
     private boolean randomData = false;
     private int delay;
     private int lastResponseCode;
@@ -67,10 +67,14 @@ public class Flooder implements Runnable {
     private void sendPost() throws Exception {
 
         if(isRandomAgent()){
-            this.userAgent = Utils.randomUserAgent();
+            userAgent = Utils.randomUserAgent();
         }
+        
+        String urlParameters;
         if(isRandomData()){
-            Faker randData = new Faker();
+            urlParameters = postData.replace(GeralConstants.RandomData.RAND_NAME_FIRST, Utils.randomFirstName());
+        }else{
+            urlParameters = postData;
         }
 
         URL obj = new URL(targetUrl);
@@ -83,7 +87,6 @@ public class Flooder implements Runnable {
 
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 
-        String urlParameters = this.postData;
         wr.writeBytes(urlParameters);
         wr.flush();
         wr.close();
@@ -103,15 +106,23 @@ public class Flooder implements Runnable {
         if(isRandomAgent()){
             this.userAgent = Utils.randomUserAgent();
         }
+        String url;
+        if(isRandomData()){
+            System.out.println("antes: "+targetUrl);
+            url = targetUrl.replace(GeralConstants.RandomData.RAND_NAME_FIRST, Utils.randomFirstName());
+            System.out.println("depois: "+url);
+        }else{
+            url = targetUrl;
+        }
 
-        URL obj = new URL(this.getTargetUrl());
+        URL obj = new URL(url);
         con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", this.userAgent);
 
         this.lastResponseCode = con.getResponseCode();
         if(GeralConstants.Debug.HTTP_REQUEST_SHOW){
-            System.out.println("\nGET URL: " + this.getTargetUrl());
+            System.out.println("\nGET URL: " + url);
             System.out.println("Response Code: " + this.lastResponseCode);
             System.out.println("Agent: "+this.userAgent);
         }

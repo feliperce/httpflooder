@@ -1,6 +1,7 @@
 package br.com.tupinikimtecnologia.utils;
 
 import br.com.tupinikimtecnologia.constants.GeralConstants;
+import com.github.javafaker.Faker;
 
 import java.util.Random;
 
@@ -12,6 +13,11 @@ public class Utils {
     public static String randomUserAgent(){
         Random rand = new Random();
         return GeralConstants.RandomData.USER_ANGET[rand.nextInt(GeralConstants.RandomData.USER_ANGET.length)];
+    }
+    
+    public static String randomFirstName(){
+        Faker randData = new Faker();
+        return randData.name().firstName();
     }
 
 }
