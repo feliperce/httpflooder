@@ -11,6 +11,7 @@ import br.com.tupinikimtecnologia.db.TTarget;
 import br.com.tupinikimtecnologia.http.Flooder;
 import br.com.tupinikimtecnologia.objects.PostData;
 import br.com.tupinikimtecnologia.objects.Target;
+import com.github.javafaker.Faker;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -53,7 +54,7 @@ public class MainForm extends javax.swing.JFrame {
         
         closeDb();
 
-        userAgentComboBox.setModel(new DefaultComboBoxModel(GeralConstants.USER_ANGET));
+        userAgentComboBox.setModel(new DefaultComboBoxModel(GeralConstants.RandomData.USER_ANGET));
         userAgentComboBox.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
 
     }
@@ -118,6 +119,9 @@ public class MainForm extends javax.swing.JFrame {
                     flooder.setRandomAgent(false);
                 } else {
                     flooder.setRandomAgent(true);
+                }
+                if(randomDataCheckBox.isSelected()){
+                    flooder.setRandomData(true);
                 }
                 flooder.setDelay((int) delaySpinner.getValue());
                 flooderThread = new Thread(flooder);

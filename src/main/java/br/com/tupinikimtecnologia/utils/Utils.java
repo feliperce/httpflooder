@@ -11,7 +11,7 @@ public class Utils {
 
     public static String randomUserAgent(){
         Random rand = new Random();
-        return GeralConstants.USER_ANGET[rand.nextInt(GeralConstants.USER_ANGET.length)];
+        return GeralConstants.RandomData.USER_ANGET[rand.nextInt(GeralConstants.RandomData.USER_ANGET.length)];
     }
 
 }

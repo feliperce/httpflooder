@@ -6,6 +6,7 @@ package br.com.tupinikimtecnologia.http;
 
 import br.com.tupinikimtecnologia.constants.GeralConstants;
 import br.com.tupinikimtecnologia.utils.Utils;
+import com.github.javafaker.Faker;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -24,7 +25,7 @@ public class Flooder implements Runnable {
     private int method;
     private boolean randomAgent;
     private String postData;
-    private boolean randomData;
+    private boolean randomData = false;
     private int delay;
     private int lastResponseCode;
     private boolean running = true;
@@ -68,6 +69,9 @@ public class Flooder implements Runnable {
         if(isRandomAgent()){
             this.userAgent = Utils.randomUserAgent();
         }
+        if(isRandomData()){
+            Faker randData = new Faker();
+        }
 
         URL obj = new URL(targetUrl);
         con = (HttpURLConnection) obj.openConnection();
@@ -79,7 +83,7 @@ public class Flooder implements Runnable {
 
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 
-        String urlParameters = postData;
+        String urlParameters = this.postData;
         wr.writeBytes(urlParameters);
         wr.flush();
         wr.close();
