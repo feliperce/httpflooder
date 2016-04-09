@@ -46,8 +46,6 @@ public class MainForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         setDb();
-        //tTarget.insertTableTarget("http://www.djisjdiasjd.com");
-        //tPostData.insertTableTarget("postdataaaaaa", 1);
 
         delaySpinner.setModel(new SpinnerNumberModel(0,0,10000,1));
 
@@ -316,7 +314,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenu1.setText("Target");
 
-        targetHistoryMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/tupinikimtecnologia/img/target_icon.png"))); // NOI18N
+        targetHistoryMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/target_icon.png"))); // NOI18N
         targetHistoryMenuItem.setText("Target History");
         targetHistoryMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,9 +327,11 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenu2.setText("Help");
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/help_icon.png"))); // NOI18N
         jMenuItem1.setText("How to use?");
         jMenu2.add(jMenuItem1);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/about_icon.png"))); // NOI18N
         jMenuItem2.setText("About");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
