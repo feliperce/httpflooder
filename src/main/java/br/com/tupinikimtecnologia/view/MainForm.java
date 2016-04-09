@@ -316,6 +316,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenu1.setText("Target");
 
+        targetHistoryMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/tupinikimtecnologia/img/target_icon.png"))); // NOI18N
         targetHistoryMenuItem.setText("Target History");
         targetHistoryMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

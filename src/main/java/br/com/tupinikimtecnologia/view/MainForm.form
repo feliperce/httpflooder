@@ -13,6 +13,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="targetHistoryMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/com/tupinikimtecnologia/img/target_icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Target History"/>
               </Properties>
               <Events>
