@@ -25,12 +25,13 @@ public class GeralConstants {
         public static final String RAND_NAME_FIRST = "{%first_name}";
         public static final String RAND_NAME_LAST = "{%last_name}";
         public static final String RAND_AGE = "{%age}";
+        public static final String RAND_EMAIL = "{%email}";
         public static final String RAND_ADDRESS = "{%address}";
         public static final String RAND_CITY = "{%city}";
         public static final String RAND_COUNTRY = "{%country}";
         public static final String RAND_LATITUDE = "{%latitude}";
         public static final String RAND_LONGITUDE = "{%longitude}";
-        public static final String RAND_PARAGRAPH = "{%paragraph}";
+        public static final String RAND_SENTENCE = "{%sentence}";
     }
 
     public static final class Debug{

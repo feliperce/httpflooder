@@ -72,7 +72,18 @@ public class Flooder implements Runnable {
         
         String urlParameters;
         if(isRandomData()){
-            urlParameters = postData.replace(GeralConstants.RandomData.RAND_NAME_FIRST, Utils.randomFirstName());
+            postDataNew = postData.replace(GeralConstants.RandomData.RAND_NAME_FIRST, Utils.randomFirstName());
+            urlParameters = postData.replace(GeralConstants.RandomData.RAND_NAME_LAST, Utils.randomLastName());
+            urlParameters = postData.replace(GeralConstants.RandomData.RAND_NAME_FULL, Utils.randomFullName());
+            urlParameters = postData.replace(GeralConstants.RandomData.RAND_AGE, Utils.randomAge());
+            urlParameters = postData.replace(GeralConstants.RandomData.RAND_EMAIL, Utils.randomEmail());
+            urlParameters = postData.replace(GeralConstants.RandomData.RAND_ADDRESS, Utils.randomAddress());
+            urlParameters = postData.replace(GeralConstants.RandomData.RAND_CITY, Utils.randomCity());
+            urlParameters = postData.replace(GeralConstants.RandomData.RAND_COUNTRY, Utils.randomCountry());
+            urlParameters = postData.replace(GeralConstants.RandomData.RAND_LATITUDE, Utils.randomLatitude());
+            urlParameters = postData.replace(GeralConstants.RandomData.RAND_LONGITUDE, Utils.randomLongitude());
+            urlParameters = postData.replace(GeralConstants.RandomData.RAND_SENTENCE, Utils.randomSentence());
+            System.out.println("Depois: "+urlParameters);
         }else{
             urlParameters = postData;
         }
@@ -108,9 +119,17 @@ public class Flooder implements Runnable {
         }
         String url;
         if(isRandomData()){
-            System.out.println("antes: "+targetUrl);
             url = targetUrl.replace(GeralConstants.RandomData.RAND_NAME_FIRST, Utils.randomFirstName());
-            System.out.println("depois: "+url);
+            url = targetUrl.replace(GeralConstants.RandomData.RAND_NAME_LAST, Utils.randomLastName());
+            url = targetUrl.replace(GeralConstants.RandomData.RAND_NAME_FULL, Utils.randomFullName());
+            url = targetUrl.replace(GeralConstants.RandomData.RAND_AGE, Utils.randomAge());
+            url = targetUrl.replace(GeralConstants.RandomData.RAND_EMAIL, Utils.randomEmail());
+            url = targetUrl.replace(GeralConstants.RandomData.RAND_ADDRESS, Utils.randomAddress());
+            url = targetUrl.replace(GeralConstants.RandomData.RAND_CITY, Utils.randomCity());
+            url = targetUrl.replace(GeralConstants.RandomData.RAND_COUNTRY, Utils.randomCountry());
+            url = targetUrl.replace(GeralConstants.RandomData.RAND_LATITUDE, Utils.randomLatitude());
+            url = targetUrl.replace(GeralConstants.RandomData.RAND_LONGITUDE, Utils.randomLongitude());
+            url = targetUrl.replace(GeralConstants.RandomData.RAND_SENTENCE, Utils.randomSentence());
         }else{
             url = targetUrl;
         }
