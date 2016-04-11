@@ -1,6 +1,7 @@
 package br.com.tupinikimtecnologia.db;
 
 import br.com.tupinikimtecnologia.constants.GeralConstants;
+import br.com.tupinikimtecnologia.utils.Utils;
 import java.sql.*;
 
 /**
@@ -13,9 +14,10 @@ public class Db {
 
     public Connection conectDb(){
         conn = null;
+        Utils.makeDbDir();
         try {
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:httpflooder.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:"+GeralConstants.Db.DB_DIR+GeralConstants.Db.DB_NAME);
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);

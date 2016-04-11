@@ -2,6 +2,7 @@ package br.com.tupinikimtecnologia.utils;
 
 import br.com.tupinikimtecnologia.constants.GeralConstants;
 import com.github.javafaker.Faker;
+import java.io.File;
 
 import java.util.Random;
 
@@ -9,6 +10,11 @@ import java.util.Random;
  * Created by felipe on 14/08/15.
  */
 public class Utils {
+    
+    public static void makeDbDir(){
+        File file = new File(GeralConstants.Db.DB_DIR);
+        file.mkdir();
+    }
 
     public static String randomUserAgent(){
         Random rand = new Random();

@@ -6,6 +6,11 @@ package br.com.tupinikimtecnologia.constants;
 public class GeralConstants {
     
     public static final String HOWTO_URL = "https://github.com/feliperce/httpflooder/wiki";
+    
+    public static final class Db{
+        public static final String DB_NAME = "httpflooder.db";
+        public static final String DB_DIR = System.getProperty("user.home")+"/HttpFlooder/";
+    }
 
     public static final class RandomData{
         public static final String USER_ANGET[] = {
@@ -42,6 +47,6 @@ public class GeralConstants {
 
     public static final class Debug{
         public static final boolean SQL_SHOW = false;
-        public static final boolean HTTP_REQUEST_SHOW = true;
+        public static final boolean HTTP_REQUEST_SHOW = false;
     }
 }
