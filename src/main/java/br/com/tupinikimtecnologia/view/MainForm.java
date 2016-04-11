@@ -13,6 +13,10 @@ import br.com.tupinikimtecnologia.objects.PostData;
 import br.com.tupinikimtecnologia.objects.Target;
 import com.github.javafaker.Faker;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -356,6 +360,11 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/help_icon.png"))); // NOI18N
         jMenuItem1.setText("How to use?");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem1);
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/about_icon.png"))); // NOI18N
@@ -409,6 +418,18 @@ public class MainForm extends javax.swing.JFrame {
         RandomHelpForm rand = new RandomHelpForm();
         rand.setVisible(true);
     }//GEN-LAST:event_randomDataHelpButtonActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Desktop d=Desktop.getDesktop();
+
+        try {
+            d.browse(new URI(GeralConstants.HOWTO_URL));
+        } catch (IOException ex) {
+            Logger.getLogger(AboutDialog.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(AboutDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
