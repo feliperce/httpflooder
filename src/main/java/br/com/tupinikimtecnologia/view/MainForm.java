@@ -237,21 +237,29 @@ public class MainForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("HttpFlooder");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Target URL:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, -1, -1));
 
         urlField.setName(""); // NOI18N
+        getContentPane().add(urlField, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 35, 331, -1));
 
         jLabel2.setText("User Agent:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 68, -1, -1));
 
         userAgentComboBox.setEnabled(false);
+        getContentPane().add(userAgentComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 91, 331, -1));
 
         jLabel3.setText("POST Data:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 124, -1, -1));
 
         postDataComboBox.setEditable(true);
         postDataComboBox.setEnabled(false);
+        getContentPane().add(postDataComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 147, 331, -1));
 
         jLabel4.setText("Method:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(426, 12, -1, -1));
 
         methodButtonGroup.add(getRadioButton);
         getRadioButton.setSelected(true);
@@ -261,6 +269,7 @@ public class MainForm extends javax.swing.JFrame {
                 getRadioButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(getRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 37, -1, -1));
 
         methodButtonGroup.add(postRadioButton);
         postRadioButton.setText("POST");
@@ -269,6 +278,7 @@ public class MainForm extends javax.swing.JFrame {
                 postRadioButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(postRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(484, 37, -1, -1));
 
         randAgentCheckBox.setSelected(true);
         randAgentCheckBox.setText("Random User Agent");
@@ -277,12 +287,17 @@ public class MainForm extends javax.swing.JFrame {
                 randAgentCheckBoxActionPerformed(evt);
             }
         });
+        getContentPane().add(randAgentCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 93, -1, -1));
 
         randomDataCheckBox.setText("Random Data");
+        getContentPane().add(randomDataCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 151, -1, -1));
 
         randomDataHelpButton.setText("?");
+        getContentPane().add(randomDataHelpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 147, 40, -1));
 
         jLabel5.setText("Delay: (seconds)");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        getContentPane().add(delaySpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 213, 92, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -307,6 +322,8 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(responseCodeText)))
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 262, 602, -1));
+
         startButton.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
         startButton.setForeground(new java.awt.Color(42, 49, 198));
         startButton.setText("START!");
@@ -315,6 +332,7 @@ public class MainForm extends javax.swing.JFrame {
                 startButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 213, 317, 43));
 
         jMenu1.setText("Target");
 
@@ -347,80 +365,6 @@ public class MainForm extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(urlField)
-                            .addComponent(userAgentComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3)
-                            .addComponent(postDataComboBox, 0, 331, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(getRadioButton)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(postRadioButton))
-                            .addComponent(randAgentCheckBox)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(randomDataCheckBox)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(randomDataHelpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(delaySpinner, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
-                        .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(urlField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(getRadioButton)
-                    .addComponent(postRadioButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userAgentComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(randAgentCheckBox))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(postDataComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(randomDataCheckBox)
-                        .addComponent(randomDataHelpButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(delaySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
