@@ -32,6 +32,10 @@ public class GeralConstants {
         public static final String RAND_LATITUDE = "{%latitude}";
         public static final String RAND_LONGITUDE = "{%longitude}";
         public static final String RAND_SENTENCE = "{%sentence}";
+        
+        public static final String[] RAND_DATA_ALL = {
+            
+        };
     }
 
     public static final class Debug{
