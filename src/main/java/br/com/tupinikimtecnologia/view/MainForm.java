@@ -293,6 +293,11 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().add(randomDataCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 151, -1, -1));
 
         randomDataHelpButton.setText("?");
+        randomDataHelpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                randomDataHelpButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(randomDataHelpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 147, 40, -1));
 
         jLabel5.setText("Delay: (seconds)");
@@ -310,7 +315,7 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(responseCodeText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE)
                 .addComponent(progressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -399,6 +404,11 @@ public class MainForm extends javax.swing.JFrame {
         AboutDialog aboutDialog = new AboutDialog(this, true);
         aboutDialog.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void randomDataHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomDataHelpButtonActionPerformed
+        RandomHelpForm rand = new RandomHelpForm();
+        rand.setVisible(true);
+    }//GEN-LAST:event_randomDataHelpButtonActionPerformed
 
     /**
      * @param args the command line arguments
