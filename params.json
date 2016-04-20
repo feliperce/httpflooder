@@ -1,6 +1,6 @@
 {
   "name": "HttpFlooder",
   "tagline": "Simple Java HttpFlooder",
-  "body": "HttpFlooder is a Java software that send mass POST and GET requests.\r\n\r\n<b><h3>Features:</b></h3>\r\n- Send massive POST and GET requests\r\n- Delay control\r\n- Store data on SQLite Database\r\n- Random data\r\n- Random user agent\r\n\r\n[See how it works](https://github.com/feliperce/httpflooder/wiki)",
+  "body": "HttpFlooder is a Java software that send mass POST and GET requests.\r\n\r\n<b><h3>Features:</b></h3>\r\n- Send massive POST and GET requests\r\n- Delay control\r\n- Store data on SQLite Database\r\n- Random data\r\n- Random user agent\r\n\r\n![](http://i.imgur.com/Qdaw0od.png)\r\n\r\n[See how it works](https://github.com/feliperce/httpflooder/wiki)",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
