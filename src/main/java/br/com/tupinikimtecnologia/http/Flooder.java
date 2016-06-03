@@ -6,15 +6,9 @@ package br.com.tupinikimtecnologia.http;
 
 import br.com.tupinikimtecnologia.constants.GeralConstants;
 import br.com.tupinikimtecnologia.utils.Utils;
-import com.github.javafaker.Faker;
-
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * Created by felipe on 14/08/15.
