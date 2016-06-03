@@ -111,7 +111,6 @@ public class Utils {
     public static String randomPassword(){
         Random rand = new Random();
         int qtCharacter = rand.nextInt(15-6) + 6;
-        System.out.println("RANDOM INT:::::::: "+qtCharacter);
         String password = "";
         for(int i=0; i<qtCharacter; i++){
             password += character[rand.nextInt(character.length)];
