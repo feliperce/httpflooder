@@ -7,21 +7,31 @@ import java.io.File;
 import java.util.Random;
 
 /**
- * Created by felipe on 14/08/15.
+ * Static methods for utils things
  */
 public class Utils {
     
+    /**
+     * Array of chars and numbers, for use on the randomPassword method
+     */
     public static final char[] character = {
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
     };
     
+    /**
+     * Create the DB dir if not exists
+     */
     public static void makeDbDir(){
         File file = new File(GeralConstants.Db.DB_DIR);
         file.mkdir();
     }
 
+    /**
+     * Set the User Agent using the static array of String
+     * @return String with User Agent
+     */
     public static String randomUserAgent(){
         Random rand = new Random();
         return GeralConstants.RandomData.USER_ANGET[rand.nextInt(GeralConstants.RandomData.USER_ANGET.length)];
@@ -93,6 +103,11 @@ public class Utils {
         return randData.internet().emailAddress();
     }
 
+    /**
+     * Set a random password from array of char, the password lenght are randomly
+     * generated
+     * @return Return the password String
+     */
     public static String randomPassword(){
         Random rand = new Random();
         int qtCharacter = rand.nextInt(9) + 5;

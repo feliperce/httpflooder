@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 
 /**
- *
+ * Main Form
  * @author Felipe Rodrigues
  */
 public class MainForm extends javax.swing.JFrame {
@@ -129,6 +129,9 @@ public class MainForm extends javax.swing.JFrame {
     }
 
 
+    /**
+     * Set the response code thread, the response label will change every request
+     */
     private void startRespCodeThread(){
         respCodeThRunning = true;
         responseCodeThread = new Thread(new Runnable() {

@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by felipe on 14/08/15.
+ * Flooder Object, it's there that will send post and get requests
  */
 public class Flooder implements Runnable {
 
@@ -28,11 +28,20 @@ public class Flooder implements Runnable {
 
     public Flooder(){}
 
+    /**
+     * Set the Flooder to send GET requests
+     * @param targetUrl the target URL
+     */
     public Flooder(String targetUrl) {
         this.targetUrl = targetUrl.trim();
         this.method = 0;
     }
 
+    /**
+     * Set the Flooder to send POST requests
+     * @param targetUrl the target URL
+     * @param postData the POST data
+     */
     public Flooder(String targetUrl, String postData) {
         this.targetUrl = targetUrl.trim();
         this.postData = postData;
@@ -59,6 +68,10 @@ public class Flooder implements Runnable {
         }
     }
 
+    /**
+     * Send post requests on the target URL
+     * @throws Exception 
+     */
     private void sendPost() throws Exception {
 
         if(isRandomAgent()){
@@ -107,6 +120,10 @@ public class Flooder implements Runnable {
 
     }
 
+    /**
+     * Send post requests on the target URL
+     * @throws Exception 
+     */
     private void sendGet() throws Exception {
 
         if(isRandomAgent()){
@@ -143,6 +160,9 @@ public class Flooder implements Runnable {
 
     }
 
+    /**
+     * Stop the thread
+     */
     public void stop(){
         this.running = false;
     }
