@@ -81,10 +81,10 @@ public class Flooder implements Runnable {
             urlParameters = urlParameters.replace(GeralConstants.RandomData.RAND_ADDRESS, Utils.randomAddress());
             urlParameters = urlParameters.replace(GeralConstants.RandomData.RAND_CITY, Utils.randomCity());
             urlParameters = urlParameters.replace(GeralConstants.RandomData.RAND_COUNTRY, Utils.randomCountry());
+            urlParameters = urlParameters.replace(GeralConstants.RandomData.RAND_PASSWORD, Utils.randomPassword());
             urlParameters = urlParameters.replace(GeralConstants.RandomData.RAND_LATITUDE, Utils.randomLatitude());
             urlParameters = urlParameters.replace(GeralConstants.RandomData.RAND_LONGITUDE, Utils.randomLongitude());
             urlParameters = urlParameters.replace(GeralConstants.RandomData.RAND_SENTENCE, Utils.randomSentence());
-
         }else{
             urlParameters = postData;
         }

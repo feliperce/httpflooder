@@ -11,6 +11,12 @@ import java.util.Random;
  */
 public class Utils {
     
+    public static final char[] character = {
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    };
+    
     public static void makeDbDir(){
         File file = new File(GeralConstants.Db.DB_DIR);
         file.mkdir();
@@ -87,4 +93,13 @@ public class Utils {
         return randData.internet().emailAddress();
     }
 
+    public static String randomPassword(){
+        Random rand = new Random();
+        int qtCharacter = rand.nextInt(9) + 5;
+        String password = "";
+        for(int i=0; i<qtCharacter; i++){
+            password += character[rand.nextInt(character.length)];
+        }
+        return password;
+    }
 }

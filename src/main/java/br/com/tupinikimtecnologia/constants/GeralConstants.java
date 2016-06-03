@@ -36,6 +36,7 @@ public class GeralConstants {
         public static final String RAND_ADDRESS = "{%address}";
         public static final String RAND_CITY = "{%city}";
         public static final String RAND_COUNTRY = "{%country}";
+        public static final String RAND_PASSWORD = "{%password}";
         public static final String RAND_LATITUDE = "{%latitude}";
         public static final String RAND_LONGITUDE = "{%longitude}";
         public static final String RAND_SENTENCE = "{%sentence}";
@@ -47,6 +48,6 @@ public class GeralConstants {
 
     public static final class Debug{
         public static final boolean SQL_SHOW = false;
-        public static final boolean HTTP_REQUEST_SHOW = false;
+        public static final boolean HTTP_REQUEST_SHOW = true;
     }
 }

@@ -11,7 +11,6 @@ import br.com.tupinikimtecnologia.db.TTarget;
 import br.com.tupinikimtecnologia.http.Flooder;
 import br.com.tupinikimtecnologia.objects.PostData;
 import br.com.tupinikimtecnologia.objects.Target;
-import com.github.javafaker.Faker;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ItemEvent;
@@ -87,12 +86,6 @@ public class MainForm extends javax.swing.JFrame {
         }
         return url;
     }
-    
-    /*private void setUrlComboBoxAll(){
-        for(Target t : targetList){
-            urlComboBox.addItem(t.getUrl());
-        }
-    }*/
 
     private boolean startFlooder(){
         boolean validate = validateForm();
@@ -154,15 +147,18 @@ public class MainForm extends javax.swing.JFrame {
     private Color setRespCodeColor(int respCode){
         if(respCode>=200 && respCode<=226){
             return Color.GREEN;
-        }
-        if(respCode>=300 && respCode<=308){
-            return Color.yellow;
-        }
-        if(respCode>=400 && respCode<=499){
-            return Color.red;
-        }
-        if(respCode>=500 && respCode<=599){
-            return new Color(117,8,8);
+        }else{
+            if(respCode>=300 && respCode<=308){
+                return Color.yellow;
+            }else{
+                if(respCode>=400 && respCode<=499){
+                    return Color.red;
+                }else{
+                    if(respCode>=500 && respCode<=599){
+                        return new Color(117,8,8);
+                    }
+                }
+            }
         }
         return Color.black;
     }
@@ -212,9 +208,7 @@ public class MainForm extends javax.swing.JFrame {
         }else{
             userAgentComboBox.setEnabled(false);
             postDataComboBox.setEnabled(false);
-        }
-        
-        
+        }   
     }
 
     /**
