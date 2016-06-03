@@ -450,9 +450,11 @@ public class MainForm extends javax.swing.JFrame {
             setComponentesEnable(true);
             progressBar1.setIndeterminate(false);
             respCodeThRunning = false;
-            flooder.stop();
-            flooderThread.interrupt();
-            responseCodeThread.interrupt();
+            if(flooder!=null){
+                flooder.stop();
+                flooderThread.interrupt();
+                responseCodeThread.interrupt();
+            }
         }
     }//GEN-LAST:event_startButtonItemStateChanged
 
