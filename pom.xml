@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>br.com.tupinikimtecnologia</groupId>
     <artifactId>HttpFlooder</artifactId>
-    <version>0.8</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     <repositories>
         <repository>
