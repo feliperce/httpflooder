@@ -14,6 +14,7 @@ import br.com.tupinikimtecnologia.objects.Target;
 import com.github.javafaker.Faker;
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -93,57 +94,47 @@ public class MainForm extends javax.swing.JFrame {
         }
     }*/
 
-    private void startFlooder(){
-        if(startButton.getText().equals("START!")){
-            if(validateForm()) {
-                setDb();
-                
-                startButton.setText("STOP!");
-                startButton.setForeground(Color.RED);
+    private boolean startFlooder(){
+        boolean validate = validateForm();
+        if(validate) {
+            setDb();
 
-                if (getRadioButton.isSelected()) {
-                    flooder = new Flooder(insertUrlOnDb());
-                } else if (postRadioButton.isSelected()) {
-                    String postData = postDataComboBox.getSelectedItem().toString().trim();
-                    String url = urlField.getText();
-                    insertUrlOnDb();
-                    int targetId = tTarget.selectIdByUrl(url);
-                    if(!tPostData.checkIfPostDataExists(postData, targetId)){
+            if (getRadioButton.isSelected()) {
+                flooder = new Flooder(insertUrlOnDb());
+            } else if (postRadioButton.isSelected()) {
+                String postData = postDataComboBox.getSelectedItem().toString().trim();
+                String url = urlField.getText();
+                insertUrlOnDb();
+                int targetId = tTarget.selectIdByUrl(url);
+                if(!tPostData.checkIfPostDataExists(postData, targetId)){
 
-                        if(targetId!=-1){
-                            postDataComboBox.addItem(postData);
-                            tPostData.insertPostData(postData, targetId);
-                        }
+                    if(targetId!=-1){
+                        postDataComboBox.addItem(postData);
+                        tPostData.insertPostData(postData, targetId);
                     }
-                    flooder = new Flooder(url, postData);
                 }
-
-                if (!randAgentCheckBox.isSelected()) {
-                    flooder.setUserAgent(userAgentComboBox.getSelectedItem().toString());
-                    flooder.setRandomAgent(false);
-                } else {
-                    flooder.setRandomAgent(true);
-                }
-                if(randomDataCheckBox.isSelected()){
-                    flooder.setRandomData(true);
-                }
-                flooder.setDelay((int) delaySpinner.getValue());
-                flooderThread = new Thread(flooder);
-                flooderThread.start();
-                startRespCodeThread();
-                progressBar1.setIndeterminate(true);
-                closeDb();
+                flooder = new Flooder(url, postData);
             }
-        }else{
-            respCodeThRunning = false;
-            flooder.stop();
-            flooderThread.interrupt();
-            responseCodeThread.interrupt();
-            startButton.setText("START!");
-            startButton.setForeground(Color.BLUE);
-            progressBar1.setIndeterminate(false);
+
+            if (!randAgentCheckBox.isSelected()) {
+                flooder.setUserAgent(userAgentComboBox.getSelectedItem().toString());
+                flooder.setRandomAgent(false);
+            } else {
+                flooder.setRandomAgent(true);
+            }
+            if(randomDataCheckBox.isSelected()){
+                flooder.setRandomData(true);
+            }
+            flooder.setDelay((int) delaySpinner.getValue());
+            flooderThread = new Thread(flooder);
+            flooderThread.start();
+            startRespCodeThread();
+            progressBar1.setIndeterminate(true);
+            closeDb();
         }
+        return validate;
     }
+
 
     private void startRespCodeThread(){
         respCodeThRunning = true;
@@ -203,6 +194,28 @@ public class MainForm extends javax.swing.JFrame {
         }
         
     }
+    
+    public void setComponentesEnable(boolean enable){
+        urlField.setEnabled(enable);
+        getRadioButton.setEnabled(enable);
+        postRadioButton.setEnabled(enable);
+        randAgentCheckBox.setEnabled(enable);
+        randomDataCheckBox.setEnabled(enable);
+        delaySpinner.setEnabled(enable);
+        if(enable){
+            if(!randAgentCheckBox.isSelected()){
+                userAgentComboBox.setEnabled(true);
+            }
+            if(!getRadioButton.isSelected()){
+                postDataComboBox.setEnabled(true);
+            }  
+        }else{
+            userAgentComboBox.setEnabled(false);
+            postDataComboBox.setEnabled(false);
+        }
+        
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -231,7 +244,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         responseCodeText = new javax.swing.JLabel();
         progressBar1 = new javax.swing.JProgressBar();
-        startButton = new javax.swing.JButton();
+        startButton = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         targetHistoryMenuItem = new javax.swing.JMenuItem();
@@ -334,14 +347,14 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 262, 602, -1));
 
         startButton.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
-        startButton.setForeground(new java.awt.Color(42, 49, 198));
-        startButton.setText("START!");
-        startButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startButtonActionPerformed(evt);
+        startButton.setForeground(new java.awt.Color(17, 0, 255));
+        startButton.setText("START FLOODER!");
+        startButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                startButtonItemStateChanged(evt);
             }
         });
-        getContentPane().add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 213, 317, 43));
+        getContentPane().add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 310, 40));
 
         jMenu1.setText("Target");
 
@@ -382,10 +395,6 @@ public class MainForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-        startFlooder();
-    }//GEN-LAST:event_startButtonActionPerformed
 
     private void randAgentCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randAgentCheckBoxActionPerformed
         if(randAgentCheckBox.isSelected()){
@@ -430,6 +439,25 @@ public class MainForm extends javax.swing.JFrame {
             Logger.getLogger(AboutDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void startButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_startButtonItemStateChanged
+        if(evt.getStateChange()==ItemEvent.SELECTED){
+            if(startFlooder()){
+                startButton.setText("STOP FLOODER!");
+                startButton.setForeground(Color.RED);
+                setComponentesEnable(false);
+            }
+        }else if(evt.getStateChange()==ItemEvent.DESELECTED){
+            startButton.setText("START FLOODER!");
+            startButton.setForeground(Color.BLUE);
+            setComponentesEnable(true);
+            progressBar1.setIndeterminate(false);
+            respCodeThRunning = false;
+            flooder.stop();
+            flooderThread.interrupt();
+            responseCodeThread.interrupt();
+        }
+    }//GEN-LAST:event_startButtonItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -489,7 +517,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JCheckBox randomDataCheckBox;
     private javax.swing.JButton randomDataHelpButton;
     private javax.swing.JLabel responseCodeText;
-    private javax.swing.JButton startButton;
+    private javax.swing.JToggleButton startButton;
     private javax.swing.JMenuItem targetHistoryMenuItem;
     private javax.swing.JTextField urlField;
     private javax.swing.JComboBox<String> userAgentComboBox;

@@ -299,22 +299,22 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="startButton">
+    <Component class="javax.swing.JToggleButton" name="startButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Noto Sans" size="18" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="c6" green="31" red="2a" type="rgb"/>
+          <Color blue="ff" green="0" red="11" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="START!"/>
+        <Property name="text" type="java.lang.String" value="START FLOODER!"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startButtonActionPerformed"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="startButtonItemStateChanged"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="254" y="213" width="317" height="43"/>
+          <AbsoluteConstraints x="280" y="210" width="310" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
