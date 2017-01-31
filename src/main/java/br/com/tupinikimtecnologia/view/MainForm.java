@@ -148,17 +148,21 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     private Color setRespCodeColor(int respCode){
-        if(respCode>=200 && respCode<=226){
-            return Color.GREEN;
+        if(respCode==-1){
+            respCode = 0;
         }else{
-            if(respCode>=300 && respCode<=308){
-                return Color.yellow;
+            if(respCode>=200 && respCode<=226){
+                return Color.GREEN;
             }else{
-                if(respCode>=400 && respCode<=499){
-                    return Color.red;
+                if(respCode>=300 && respCode<=308){
+                    return Color.yellow;
                 }else{
-                    if(respCode>=500 && respCode<=599){
-                        return new Color(117,8,8);
+                    if(respCode>=400 && respCode<=499){
+                        return Color.red;
+                    }else{
+                        if(respCode>=500 && respCode<=599){
+                            return new Color(117,8,8);
+                        }
                     }
                 }
             }
@@ -245,6 +249,7 @@ public class MainForm extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         targetHistoryMenuItem = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -356,13 +361,22 @@ public class MainForm extends javax.swing.JFrame {
         jMenu1.setText("Target");
 
         targetHistoryMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/target_icon.png"))); // NOI18N
-        targetHistoryMenuItem.setText("Target History");
+        targetHistoryMenuItem.setText("History");
         targetHistoryMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 targetHistoryMenuItemActionPerformed(evt);
             }
         });
         jMenu1.add(targetHistoryMenuItem);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clear_icon.png"))); // NOI18N
+        jMenuItem3.setText("Clear");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -450,6 +464,8 @@ public class MainForm extends javax.swing.JFrame {
             setComponentesEnable(true);
             progressBar1.setIndeterminate(false);
             respCodeThRunning = false;
+            responseCodeText.setText("0");
+            responseCodeText.setForeground(Color.BLACK);
             if(flooder!=null){
                 flooder.stop();
                 flooderThread.interrupt();
@@ -457,6 +473,15 @@ public class MainForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_startButtonItemStateChanged
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        if(!startButton.isSelected()){
+            urlField.setText("");
+            postDataComboBox.removeAllItems();
+        }else{
+            JOptionPane.showMessageDialog(null, "Stop the flooder first", "Flooder running", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -507,6 +532,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.ButtonGroup methodButtonGroup;
     private javax.swing.JComboBox<String> postDataComboBox;
