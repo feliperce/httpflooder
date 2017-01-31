@@ -58,6 +58,9 @@ public class Flooder implements Runnable {
                     }
                     sendGet();
                 }else if(method==1){
+                    if(delay!=0){
+                        Thread.sleep(delay*1000);
+                    }
                     sendPost();
                 }
 
