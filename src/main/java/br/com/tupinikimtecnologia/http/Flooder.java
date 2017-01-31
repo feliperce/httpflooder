@@ -66,6 +66,7 @@ public class Flooder implements Runnable {
 
             } catch (Exception e) {
                 e.printStackTrace();
+                this.lastResponseCode = 0;
                 //this.running = false;
             }
         }
